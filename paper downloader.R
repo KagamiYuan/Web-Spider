@@ -11,5 +11,11 @@ for(i in 14000000:15000000){
         write(article, file=paste(i,"-",title, ".txt", sep=""), sep=" ")#写成txt
 }
 
-
-
+url <- "http://www.unitalenlaw.com/html/unitalenlaw/category/46559-1.htm?&l6930=0"
+doc <- htmlParse(url)
+links <- xpathSApply(doc, "//a/@href")
+free(doc)
+links <- as.vector(links)
+names <- xpathSApply(doc, "//a", xmlValue)
+names <- as.vector(names)
+comb <- data.frame(names, links)
